@@ -3,10 +3,13 @@ import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../../../firebase/clientApp";
-import { User } from "firebase/auth";
+import { AuthError, User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
-type OAuthButtonsProps = {};
+type OAuthButtonsProps = {
+  error: AuthError;
+};
+
 
 const OAuthButtons: React.FC<OAuthButtonsProps> = () => {
   const [signInWithGoogle, userCred, loading, error] = useSignInWithGoogle(auth);
@@ -22,6 +25,7 @@ const OAuthButtons: React.FC<OAuthButtonsProps> = () => {
     }
   },[userCred]);
 //
+
   return (
     <Flex direction="column" mb={4} width="100%">
       <Button
@@ -36,7 +40,7 @@ const OAuthButtons: React.FC<OAuthButtonsProps> = () => {
       <Button variant="oauth">Some Other Provider</Button>
       {error && (
         <Text textAlign="center" fontSize="10pt" color="red" mt={2}>
-          {error}
+          {error?.message}
         </Text>
       )}
     </Flex>
