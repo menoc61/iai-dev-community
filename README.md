@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Campus Website Community
 
-## Getting Started
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+## Description
+
+This is a web application that allows users to create communities and share posts with various media types such as images, video, links, poll, voice, etc. The application is built using TypeScript, Chakra UI, Atom, Recoil, and Firebase.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technology used](#Technologies)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [License](#license)
+- [Questions](#questions)
+
+## Installation
+
+To run the application locally, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Install the dependencies by running `npm install` in case of dependences update`npm install --f` .
+3. Start the development server by running `npm run dev`.
+4. Open `http://localhost:3000` in your browser to view the application.
+5. don't forget to add the `.env.local` file in the root directory and paste in the following variables:
 
 ```bash
-npm run dev
-# or
-yarn dev
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
 ```
+## Usage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Users can create communities with a name, description, and image.
+- Users can post various media types such as images, video, links, poll, voice, etc. in their communities.
+- The application uses Firebase storage and database to store and retrieve media files and URLs.
+- The application is built using modern web technologies such as TypeScript, Chakra UI, Atom, Recoil, and Firebase.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- TypeScript
+- Chakra UI
+- Atom
+- Recoil
+- Firebase
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Contributing
 
-## Learn More
+- This project has been think by the club iai dev 2022-2023 and design by myself `Gilles Momeni`
+- The project is open source and every IAI-CAMEROUN student have the right to contribut to it's evolution do your best not to break the system
+- If you have a problem contact me for the app references.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is not yet licensed but will be lather put under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Questions
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you have any questions, please [contact me](mailto:gillemomeni@gmail.com) or visit my [GitHub profile](https://github.com/menoc61).
