@@ -1,13 +1,27 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
-import { auth } from "../../../firebase/clientApp";
+import { auth, firestore } from "../../../firebase/clientApp";
+import { User } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 type OAuthButtonsProps = {};
 
 const OAuthButtons: React.FC<OAuthButtonsProps> = () => {
-  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, userCred, loading, error] = useSignInWithGoogle(auth);
 
+  // temp solution for login instead of using cloud function
+  const createUserDocument = async (user: User) => {
+    const userdocRef = doc(firestore,"users",user.uid);
+    await setDoc(userdocRef,JSON.parse(JSON.stringify(user)));
+  }
+  useEffect(()=>{
+    if(userCred){
+      createUserDocument(userCred.user);
+    }
+  },[userCred]);
+//
   return (
     <Flex direction="column" mb={4} width="100%">
       <Button

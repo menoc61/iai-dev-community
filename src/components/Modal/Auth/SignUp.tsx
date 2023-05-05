@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { ModalView } from "../../../atoms/authModalAtom";
-import { auth } from "../../../firebase/clientApp";
+import { auth, firestore } from "../../../firebase/clientApp";
 import { FIREBASE_ERRORS } from "../../../firebase/errors";
 import InputItem from "../../Layout/InputItem";
+import { User } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 
 type SignUpProps = {
   toggleView: (view: ModalView) => void;
@@ -17,7 +19,7 @@ const SignUp: React.FC<SignUpProps> = ({ toggleView }) => {
     confirmPassword: "",
   });
   const [formError, setFormError] = useState("");
-  const [createUserWithEmailAndPassword, _, loading, authError] =
+  const [createUserWithEmailAndPassword, userCred, loading, authError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +45,16 @@ const SignUp: React.FC<SignUpProps> = ({ toggleView }) => {
       [name]: value,
     }));
   };
-
+//temp solution to cloud function usercrud
+  const createUserDocument = async (user: User) => {
+  await addDoc(collection(firestore,"users"),JSON.parse(JSON.stringify(user)));
+    }
+  useEffect(()=>{
+    if(userCred){
+      createUserDocument(userCred.user);
+    }
+  },[userCred]);
+//
   return (
     <form onSubmit={onSubmit}>
       <InputItem
@@ -67,8 +78,7 @@ const SignUp: React.FC<SignUpProps> = ({ toggleView }) => {
         onChange={onChange}
       />
       <Text textAlign="center" mt={2} fontSize="10pt" color="red">
-        {formError ||
-          FIREBASE_ERRORS[authError?.message as keyof typeof FIREBASE_ERRORS]}
+        {formError || FIREBASE_ERRORS[authError?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
       <Button
         width="100%"
